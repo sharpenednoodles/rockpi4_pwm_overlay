@@ -4,7 +4,7 @@
 
 # Check if the script is running as root (EUID 0)
 if (( EUID != 0 )); then
-  echo "This script must be run with root privileges. Please use sudo." >&2
+  echo "This script must be run with root privileges. Please use sudo and try again." >&2
   exit 1
 fi
 
@@ -25,8 +25,8 @@ cp rockchip-pwm-gpio.dtbo /boot/dtb/rockchip/overlay/
 
 # Enable the overlay
 ENVFILE="/boot/dietpiEnv.txt"
-grep -qxF "overlay_prefix=rockchip" "$ENVFILE" || echo "overlay_prefix=rockchip" | sudo tee -a "$ENVFILE"
-grep -qxF "overlays=pwm-gpio" "$ENVFILE"     || echo "overlays=pwm-gpio"     | sudo tee -a "$ENVFILE"
+grep -qxF "overlay_prefix=rockchip" "$ENVFILE" || echo "overlay_prefix=rockchip" | tee -a "$ENVFILE"
+grep -qxF "overlays=pwm-gpio" "$ENVFILE"     || echo "overlays=pwm-gpio"     | tee -a "$ENVFILE"
 
 # Create the digital group
 groupadd -f digital
