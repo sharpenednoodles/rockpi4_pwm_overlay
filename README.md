@@ -1,4 +1,19 @@
-# rockpi4_pwm_overlay
+# DietPi Rock 4C+ PWM Fan Control
+Based on original rockpi4_pwm_overlay repo by Piotr Wroblewski
+
+This repo is designed to be a one script install specifically for the RockPi 4C+ running the diet pi distro.
+
+## Installation
+Run
+
+```
+chmod +x install.sh
+sudo install.sh
+``` 
+
+To set up fan control. This will fetch and install device tree compiler from APT if not already available
+
+## Original
 rockpi 4 pwm overlay code
 
 to create pwm overlay call : 

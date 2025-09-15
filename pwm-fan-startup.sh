@@ -25,36 +25,36 @@
 # Result: chown <USERNAME>:digital /sys/class/gpio
 
 #set permissions
+chown -R :digital /sys/class/pwm/pwmchip0/
 chown -R :digital /sys/class/pwm/pwmchip1/
-chown -R :digital /sys/class/pwm/pwmchip2/
 
+find /sys/class/pwm/pwmchip0/ -name export -exec chmod g+rw {} \;
+find /sys/class/pwm/pwmchip0/ -name unexport -exec chmod g+rw {} \;
 find /sys/class/pwm/pwmchip1/ -name export -exec chmod g+rw {} \;
 find /sys/class/pwm/pwmchip1/ -name unexport -exec chmod g+rw {} \;
-find /sys/class/pwm/pwmchip2/ -name export -exec chmod g+rw {} \;
-find /sys/class/pwm/pwmchip2/ -name unexport -exec chmod g+rw {} \;
 
 #initialize both pwmchip
+echo 0 > /sys/class/pwm/pwmchip0/export
 echo 0 > /sys/class/pwm/pwmchip1/export
-echo 0 > /sys/class/pwm/pwmchip2/export
 
+chown -R :digital /sys/class/pwm/pwmchip0/
 chown -R :digital /sys/class/pwm/pwmchip1/
-chown -R :digital /sys/class/pwm/pwmchip2/
 
 #set permissions for PWM parameters ( duty_cycle enable period polarity power uevent )
-find /sys/class/pwm/pwmchip1/ -name "duty_cycle" -exec chmod g+rw {} \;
-find /sys/class/pwm/pwmchip1/ -name "enable" -exec chmod g+rw {} \;
-find /sys/class/pwm/pwmchip1/ -name "period" -exec chmod g+rw {} \;
-find /sys/class/pwm/pwmchip1/ -name "polarity" -exec chmod g+rw {} \;
-find /sys/class/pwm/pwmchip1/ -name "power" -exec chmod g+rw {} \;
-find /sys/class/pwm/pwmchip1/ -name "uevent" -exec chmod 0660 {} \;
+find /sys/class/pwm/pwmchip0/ -name "duty_cycle" -exec chmod g+rw {} \;
+find /sys/class/pwm/pwmchip0/ -name "enable" -exec chmod g+rw {} \;
+find /sys/class/pwm/pwmchip0/ -name "period" -exec chmod g+rw {} \;
+find /sys/class/pwm/pwmchip0/ -name "polarity" -exec chmod g+rw {} \;
+find /sys/class/pwm/pwmchip0/ -name "power" -exec chmod g+rw {} \;
+find /sys/class/pwm/pwmchip0/ -name "uevent" -exec chmod 0660 {} \;
 
-find /sys/class/pwm/pwmchip1/ -name export -exec chmod g+rw {} \;
-find /sys/class/pwm/pwmchip1/ -name unexport -exec chmod g+rw {} \; 
+find /sys/class/pwm/pwmchip0/ -name export -exec chmod g+rw {} \;
+find /sys/class/pwm/pwmchip0/ -name unexport -exec chmod g+rw {} \; 
 
 # if initialization of particular FAN is required, it can be called here 
 # i.e. set FAN speed to 100%
-/usr/local/bin/pwmset 100 -v
-#wait for 10 sec
-sleep 10
-#decrese speed to 35%
-/usr/local/bin/pwmset 35 -v
+/usr/local/bin/pwmset 100
+#wait for 5 sec
+sleep 5
+#decrease speed to 30%
+/usr/local/bin/pwmset 30
